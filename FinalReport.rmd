@@ -50,7 +50,28 @@ colPerc(table1)
 chisq.test(table1)
 chisqtestGC(table1)
 fisher.test(table1)
+Malesmod <- fisher.test(table1)
 ```
+
+According to the Chi-squared test, the p-value is very small(2.2e-16). This indicates that we need to reject the null hypothesis and that there is a difference between the males who took the placebo and Males who took the drug.
+
+```{r}
+MaleEstimate <- Malesmod$estimate 
+Malelow <- Malesmod$conf.int[1]
+Malehigh <- Malesmod$conf.int[2]
+
+Malelowprob <- Malelow / (1 + Malelow)
+Maleloweffect <- Malelowprob * 100
+
+Malehighprob <- Malehigh / (1+ Malehigh)
+Malehigheffect <- Malehighprob * 100
+
+Maleprob <- MaleEstimate / (1+ MaleEstimate)
+MaleEffect <- Maleprob * 100
+options(digits = 1)
+```
+
+The effectiveness of the Covid91 vaccine for Males is `r MaleEffect`. The confidence interval for males is `r Maleloweffect` to `r Malehigheffect`
 
 
 # Females
