@@ -76,9 +76,102 @@ The effectiveness of the Covid91 vaccine for Males is `r MaleEffect`. The confid
 
 # Females
 
+```{r}
+Females <- filter(Covid91, sex == "Woman")
+```
+```{r}
+barchartGC(~infected + treatment,data=Females)
+barchartGC(~infected + treatment,data=Females, type="percent")
+```
+
+According to the bar chart, this vaccine is not effective for Females. The blue bar that indicates that out of the Females who are sick more than 50% had taken the vaccine.
+
+## Numerical Summaries  
+```{r}
+table1 <- xtabs(~infected + treatment, data=Females)
+rowPerc(table1)
+colPerc(table1)
+```
+This table reassures that the Females who got sick, 58% of them had taken the vaccine, versus 42% of the sick that took the placebo. Based on this information we can see that the vaccine seems to not be effective for Females.
+
+## Inferential  
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+Femalesmod <- fisher.test(table1)
+```
+
+Since our p-value is very small, we have to reject the null hypothesis, indicating that there is a difference between our data. In this case, it looks like the data is different in a bad way, as in the drug is not effective compared to the placebo.
+
+## Calculating Effectiveness
+
+```{r}
+FemaleEstimate <- Femalesmod$estimate 
+Femalelow <- Femalesmod$conf.int[1]
+Femalehigh <- Femalesmod$conf.int[2]
+
+Femalelowprob <- Femalelow / (1 + Femalelow)
+Femaleloweffect <- Femalelowprob * 100
+
+Femalehighprob <- Femalehigh / (1+ Femalehigh)
+Femalehigheffect <- Femalehighprob * 100
+
+Femaleprob <- FemaleEstimate / (1+ FemaleEstimate)
+FemaleEffect <- Femaleprob * 100
+options(digits = 1)
+```
+
+The effectiveness of the Covid91 vaccine for females is `r FemaleEffect`. The confidence interval for females is `r Femaleloweffect` to `r Femalehigheffect` . 
 
 
 # Drug Users
+
+```{r}
+DrugUsers <- filter(Covid91, DrugUser == "yes")
+```
+```{r}
+barchartGC(~infected + treatment,data=DrugUsers)
+barchartGC(~infected + treatment,data=DrugUsers, type="percent")
+```
+
+# Numerical Summaries
+
+```{r}
+table1 <- xtabs(~infected + treatment, data=DrugUsers)
+rowPerc(table1)
+colPerc(table1)
+```
+## Inferential 
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+DrugUsersmod <- fisher.test(table1)
+```
+
+
+## Calculating Effectiveness
+
+```{r}
+DrugUsersEstimate <- DrugUsersmod$estimate 
+Druglow <- DrugUsersmod$conf.int[1]
+Drughigh <- DrugUsersmod$conf.int[2]
+
+Druglowprob <- Druglow / (1 + Druglow)
+Drugloweffect <- Druglowprob * 100
+
+Drughighprob <- Drughigh / (1+ Drughigh)
+Drughigheffect <- Drughighprob * 100
+
+Drugprob <- DrugUsersEstimate / (1+ DrugUsersEstimate)
+DrugUserEffect <- Drugprob * 100
+options(digits = 1)
+```
+
+The effectiveness of the Covid91 vaccine for drug users is `r DrugUserEffect`. The confidence interval for drug users is `r Drugloweffect` to `r Drughigheffect` . 
 
 # LGBTQ
 
