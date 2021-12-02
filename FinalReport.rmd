@@ -33,7 +33,8 @@ barchartGC(~infected + treatment,data=Males)
 barchartGC(~infected + treatment,data=Males, type="percent")
 ```
 
-The bar chart shows us that those who took the placebo got sick more than the males who took the Covid91. We can see that the pink bar for placebo is almost double in size compared to the vaccine. This indicates the vaccine is effective for the Males group.
+
+The percent bar chart shows us that those who took the placebo got sick more than the males who took the Covid91. We can see that the pink bar for placebo is almost double in size compared to the vaccine. This indicates the vaccine is effective for the Males group.
 
 ## Numerical Summaries  
 ```{r}
@@ -53,6 +54,7 @@ fisher.test(table1)
 Malesmod <- fisher.test(table1)
 ```
 
+
 According to the Chi-squared test, the p-value is very small(2.2e-16). This indicates that we need to reject the null hypothesis and that there is a difference between the males who took the placebo and Males who took the vaccine.
 
 ```{r}
@@ -71,7 +73,7 @@ MaleEffect <- Maleprob * 100
 options(digits = 1)
 ```
 
-The effectiveness of the Covid91 vaccine for Males is `r MaleEffect`. The confidence interval for males is `r Maleloweffect` to `r Malehigheffect`.
+The effectiveness of the Covid91 vaccine for Males is `r MaleEffect`. The confidence interval for males is `r Maleloweffect` to `r Malehigheffect`. This is a high efficacy rate, so this vaccine does work for the Male group!
 
 
 # Females
@@ -84,6 +86,7 @@ barchartGC(~infected + treatment,data=Females)
 barchartGC(~infected + treatment,data=Females, type="percent")
 ```
 
+
 According to the Percent bar chart, this vaccine is not effective for Females. The blue bar that indicates that out of the Females who are sick more than 50% had taken the vaccine.
 
 ## Numerical Summaries  
@@ -92,6 +95,7 @@ table1 <- xtabs(~infected + treatment, data=Females)
 rowPerc(table1)
 colPerc(table1)
 ```
+
 This table reassures that the Females who got sick, 58% of them had taken the vaccine, versus 42% of the sick that took the placebo. Based on this information we can see that the vaccine seems to not be effective for Females.
 
 ## Inferential Results 
@@ -102,6 +106,7 @@ chisqtestGC(table1)
 fisher.test(table1)
 Femalesmod <- fisher.test(table1)
 ```
+
 
 Since our p-value is very small, we have to reject the null hypothesis, indicating that there is a difference between our data. In this case, it looks like the data is different in a bad way, as in the vaccine is not effective compared to the placebo.
 
@@ -123,7 +128,8 @@ FemaleEffect <- Femaleprob * 100
 options(digits = 1)
 ```
 
-The effectiveness of the Covid91 vaccine for females is `r FemaleEffect`. The confidence interval for females is `r Femaleloweffect` to `r Femalehigheffect` . 
+
+The effectiveness of the Covid91 vaccine for females is `r FemaleEffect`. The confidence interval for females is `r Femaleloweffect` to `r Femalehigheffect` . Unfortunately, this is a very low efficacy, and tells us that the vaccine is ineffective for the Females group.
 
 
 # Drug Users
@@ -137,7 +143,7 @@ barchartGC(~infected + treatment,data=DrugUsers, type="percent")
 ```
 
 
-According to the Percent bar chart, the Drug Users group does benefit from taking this drug. In our sick group, more than 60% had not taken the vaccine, giving us some insight into its efficacy.
+According to the Percent bar chart, the Drug Users group does benefit from taking this vaccine. In our sick group, more than 60% had not taken the vaccine, giving us some insight into its efficacy.
 
 ## Numerical Summaries
 
@@ -147,7 +153,7 @@ rowPerc(table1)
 colPerc(table1)
 ```
 
-33% of the sick Drug Users had the treatment, and 67% of the Drug Users who got sick took the placebo. This is a 2 to 1 difference and lets us know that the vaccine is in fact working.
+33% of the sick Drug Users had been given the vaccine, and 67% of the Drug Users who got sick took the placebo. This is a 2 to 1 difference and lets us know that the vaccine is in fact working.
 
 
 
@@ -160,7 +166,7 @@ fisher.test(table1)
 DrugUsersmod <- fisher.test(table1)
 ```
 
-Since our p-value is small(0.002) this indicates that we need to reject the null hypothesis and that there is a difference between the Drug Users who took the placebo and the Drug Users who took the drug. In this case, it looks like the data is different as in the drug is effective compared to the placebo.
+Since our p-value is small(0.002) this indicates that we need to reject the null hypothesis and that there is a difference between the Drug Users who took the placebo and the Drug Users who took the vaccine. In this case, it looks like the data is different as in the vaccine is effective compared to the placebo.
 
 ## Calculating Effectiveness
 
@@ -180,7 +186,7 @@ DrugUserEffect <- Drugprob * 100
 options(digits = 1)
 ```
 
-The effectiveness of the Covid91 vaccine for drug users is `r DrugUserEffect`. The confidence interval for drug users is `r Drugloweffect` to `r Drughigheffect` . 
+The effectiveness of the Covid91 vaccine for drug users is `r DrugUserEffect`. The confidence interval for drug users is `r Drugloweffect` to `r Drughigheffect` . This vaccine effectiveness percentage is high for the Drug Users group, indicating the vaccine is working for them!
 
 # LGBTQ
 
@@ -191,7 +197,8 @@ LGBTQ <- filter(Covid91, LGBTQ == "gay")
 barchartGC(~infected + treatment,data=LGBTQ)
 barchartGC(~infected + treatment,data=LGBTQ, type="percent")
 ```
-According to the bar chart, the LGBTQ does not benefit from taking this drug. In our sick group, more than 50% had taken the drug.
+
+According to the bar chart, the LGBTQ does not benefit from taking this vaccine. In our sick group, more than 50% had taken the vaccine. This vizualizes the effectiveness of the experimental vaccine.
 
 ## Numerical Summaries
 
@@ -200,7 +207,8 @@ table1 <- xtabs(~infected + treatment, data=LGBTQ)
 rowPerc(table1)
 colPerc(table1)
 ```
-This chart tells us that the LGBTQ should not take this drug, as 71% of those who were sick had taken the drug versus 29% of the sick people had not.
+
+This chart tells us that the LGBTQ should not take this vaccine, as 71% of those who were sick had gotten it versus 29% of the sick people had not.
 
 
 ## Inferential Results
@@ -211,7 +219,8 @@ fisher.test(table1)
 LGBTQmod <- fisher.test(table1)
 ```
 
-According to the Chi-squared test, the p-value is very small(6e-06). This indicates that we need to reject the null hypothesis and that there is a difference between the LGBTQ+ who took the placebo and LGBTQ+ who took the drug. In this case the difference is in an ineffective way, as there are more people who got infected while on the drug.
+
+According to the Chi-squared test, the p-value is very small(6e-06). This indicates that we need to reject the null hypothesis and that there is a difference between the LGBTQ+ who took the placebo and LGBTQ+ who had received the vaccine. In this case the difference is in an ineffective way, as there are more people who got infected after being given the COVID91 vaccine.
 
 ## Calculating Effectiveness
 ```{r}
@@ -230,11 +239,14 @@ LGBTQEffect <- LGBTQprob * 100
 options(digits = 1)
 ```
 
-The effectiveness of the Covid91 vaccine for LGBTQ community is `r LGBTQEffect`. The confidence interval for those in the LGBTQ community is `r LGBTQloweffect` to `r LGBTQhigheffect` . 
+
+The effectiveness of the Covid91 vaccine for LGBTQ community is `r LGBTQEffect`. The confidence interval for those in the LGBTQ community is `r LGBTQloweffect` to `r LGBTQhigheffect`. This is a low efficacy percentage, and confirms the vaccine is ineffective.
 
 
 # Conclusions and recommendations
 
-to conclude, we ran bar charts that included Percentage Bar charts, calculated Fisher tests to confirm a difference between the placebo and experimental group, and ran efficacy for an experimental vaccine on four different groups: Males, Females, Drug Users and LGBTQ+ members. 
+To conclude, we ran bar charts that included Percentage Bar charts, calculated Fisher tests to confirm a difference between the placebo and experimental group, and ran efficacy for an experimental vaccine on four different groups: Males, Females, Drug Users and LGBTQ+ members. 
 
-The results were that this experimental COVID91 vaccine worked on people in Males group and the Drug Users group. This vaccine was not effective for those in the Females group and the LGBTQ+, with more people getting sick if they took the vaccine versus the placebo. These results were confirmed via the p-test and efficacy results, with a confidence interval of
+The results were that this experimental COVID91 vaccine worked on people in the Males group and the Drug Users group. This vaccine was not effective for those in the Females group and the LGBTQ+, with more people getting sick if they took the vaccine versus the placebo. These results were confirmed via the p-test and efficacy results, with a confidence interval of 95% for all groups.
+
+Some recommendations for future experiments would be to crosscheck these different groups. For example, how the efficacy of the vaccine for let's say, a Male in the LGBT+ community who is also a drug user, would change if we used that kind of complex data. We could also use logistic regression to predict what groups would respond best to the vaccine. All in all, the techniques we used here are useful to analyze efficacy and determine who can benefit from a certain medicine or vaccine in the future and can be applied to different trials as well.
